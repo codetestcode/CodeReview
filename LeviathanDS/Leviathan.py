@@ -20,10 +20,13 @@ class Leviathan:
 
 	def generate_text_files(self, fname, num_of_files,seed_text):
 		"""Usage: generate_text_files(fname,num_of_files,seed_text)"""
-		with open("data/{}.txt".format(fname),'w') as txtfile:
-			for i in range(1,num_of_files):
-				txtfile.write(u'{}{}'.format(seed_text,i))
-			txtfile.close()
+		try:
+			with open("data/{}.txt".format(fname),'w') as txtfile:
+				for i in range(1,num_of_files):
+					txtfile.write(u'{}{}'.format(seed_text,i))
+				txtfile.close()
+		except Exception as e:
+			print('Sorry an error has occured while generating text files: {}'.format(e))
 
 	def generate_xlsx_files(self, fname, num_of_files):
 		"""Usage: generate_xlsx_files(fname, num_of_files)"""
@@ -44,13 +47,18 @@ class Leviathan:
 				[random.choice(choices),random.randrange(300)],
 				)
 
-			for item, cost in (exspenses):
-				worksheet.write(row, col, item)
-				worksheet.write(row,col + 1, cost)
-				row += 1
-			worksheet.write(row, 0, 'Total')
-			worksheet.write(row, 1, '=SUM(B1:B4)')
-			workbook.close()
+			try:
+
+				for item, cost in (exspenses):
+					worksheet.write(row, col, item)
+					worksheet.write(row,col + 1, cost)
+					row += 1
+				worksheet.write(row, 0, 'Total')
+				worksheet.write(row, 1, '=SUM(B1:B4)')
+				workbook.close()
+
+			except Exception as e:
+				print("There was a problem saving your xlsx file: {}".format(e))
 
 	def generate_docx_files(self, fname, num_of_files, seed_text):
 		"""Usage: generate_docx_files(fname,num_of_files, seed_text)"""
@@ -69,8 +77,12 @@ class Leviathan:
 			keywords =['test','python','leviathan']
 
 			coreprops = coreproperties(title=title, subject=subject, creator=creator, keywords=keywords)
+			try:
 
-			savedocx(document,coreprops, appprops, contenttypes, websettings, wordrelationships, 'data/{}_{}.docx'.format(fname,x))
+				savedocx(document,coreprops, appprops, contenttypes, websettings, wordrelationships, 'data/{}_{}.docx'.format(fname,x))
+			
+			except Exception as e:
+				print('There was a problem saving your docx file: {}'.format(e))
 
 	def generate_pdf_files(self, fname, num_of_files,seed_text):
 		"""Usage: gnerate_pdf_files"""
@@ -81,12 +93,15 @@ class Leviathan:
 		pdf.h1('{}'.format(seed_text))
 		pdf.p(str(now))
 		pdf.generate()
+		try:
 
-		for x in range(0, num_of_files):
+			for x in range(0, num_of_files):
 			
-			with open("data/{}_{}.pdf".format(fname, x), 'w') as pdfout:
-				pdfout.write(f.getvalue())
-		pdfout.close()
+				with open("data/{}_{}.pdf".format(fname, x), 'w') as pdfout:
+					pdfout.write(f.getvalue())
+			pdfout.close()
+		except Exception as e:
+			print('There was a problem saving your pdf file: {}'.format(e))
 
 
 def test():
