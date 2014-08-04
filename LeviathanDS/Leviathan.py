@@ -7,7 +7,7 @@ import random
 import datetime
 
 relationships 		= relationshiplist()
-appprops 		= appproperties()
+appprops 			= appproperties()
 contenttypes 		= contenttypes()
 websettings 		= websettings()
 wordrelationships 	= wordrelationships(relationships)
