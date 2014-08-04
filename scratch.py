@@ -1,47 +1,18 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Created By Don Johnson <dj@codetestcode.io)
+from io import BytesIO
+from pdfdocument.document import PDFDocument
 
-import re
-import sys
+def gen_pdf(fname, num_of_files,seed_text):
+	f = BytesIO()
+	pdf = PDFDocument(f)
+	pdf.init_letter()
+	pdf.h1('Test')
+	pdf.p('{}'.format(seed_text))
+	pdf.generate()
 
-PREFIX_EXP = "((?:2|1)\\d{3}(?:-|\\/)(?:(?:0[1-9])|(?:1[0-2]))(?:-|\\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))(?:T|\\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9])(?:[0-5][0-9])(,)(\\d\\d\\d)( )(\\[.*?\\])( )(".strip()
-
-SUFFIX_EXP = '))'
-
-ERROR_DEF				= PREFIX_EXP + 'ERROR' + SUFFIX_EXP
-WARN_DEF 				= PREFIX_EXP + 'WARN' + SUFFIX_EXP
-INFO_DEF				= PREFIX_EXP + 'INFO' + SUFFIX_EXP
-EIN_DEF					= '(EIN)(//d)(//d)(//d)(//d)'
-
-CLI_OPTIONS = {'--ERROR':ERROR_DEF,'--WARN': WARN_DEF,'--INFO': INFO_DEF,'--EIN': INFO_DEF }
-
-class LogUtil:
-
-	def filter(self,pattern,status_color,file_location):
-		self.pattern = pattern
-
-		color_options = {	'info_color': "\\033[94m",'warn_color': '\\033[93m','error_color':'\\033[91m'}
-
-		try:
-			log_pattern = re.compile(pattern)
-			seen = set()
-			with open(file_location,'r') as log:
-				for line in log:
-					mo = log_pattern.search(line)
-					if mo is not None:
-						pattern_entry = mo.group()
-						if pattern_entry not in seen:
-							seen.add(pattern_entry)
-							print(color_options[str(self.status_color)] + line)
-		except Exception as e:
-			print("An error has occured: {}".format(e))
-
-def main():
-	# info_log_test = LogUtil()
-	# print(info_log_test.filter(INFO_DEF,'info_color','data/server.log'))
-	print(PREFIX_EXP)
-	
+	for x in range(0,num_of_files):
+		with open('data/{}_{}.pdf'.format(fname,x),'w') as pdfout:
+			pdfout.write(f.getvalue())
+	pdfout.close()
 
 if __name__ == '__main__':
-	main()
+	print(gen_pdf("testpdf",2,"test file"))
