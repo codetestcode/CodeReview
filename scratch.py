@@ -5,11 +5,7 @@
 import re
 import sys
 
-PREFIX_EXP = '''((?:2|1)\\d{3}(?:-|\\/)(?:(?:0[1-9])|(?:1[0-2]))
-	                (?:-|\\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))
-	                (?:T|\\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9]):
-	                (?:[0-5][0-9])(,)(\\d\\d\\d)( )(\\[.*?\\])( )(
-	            '''
+PREFIX_EXP = "((?:2|1)\\d{3}(?:-|\\/)(?:(?:0[1-9])|(?:1[0-2]))(?:-|\\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))(?:T|\\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9])(?:[0-5][0-9])(,)(\\d\\d\\d)( )(\\[.*?\\])( )(".strip()
 
 SUFFIX_EXP = '))'
 
@@ -42,8 +38,9 @@ class LogUtil:
 			print("An error has occured: {}".format(e))
 
 def main():
-	info_log_test = LogUtil()
-	print(info_log_test.filter(INFO_DEF,'info_color','data/server.log'))
+	# info_log_test = LogUtil()
+	# print(info_log_test.filter(INFO_DEF,'info_color','data/server.log'))
+	print(PREFIX_EXP)
 	
 
 if __name__ == '__main__':
