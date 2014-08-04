@@ -1,0 +1,6 @@
+reportlab
+pdfdocument
+xlsxwriter
+lxml
+PIL
+python-docx
