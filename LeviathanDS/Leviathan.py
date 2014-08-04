@@ -4,13 +4,12 @@ from pdfdocument.document import PDFDocument
 from docx import *
 import xlsxwriter
 import random
-
 import datetime
 
-relationships = relationshiplist()
-appprops = appproperties()
-contenttypes = contenttypes()
-websettings = websettings()
+relationships 		= relationshiplist()
+appprops 					= appproperties()
+contenttypes 			= contenttypes()
+websettings 			= websettings()
 wordrelationships = wordrelationships(relationships)
 
 
@@ -74,6 +73,7 @@ class Leviathan:
 			savedocx(document,coreprops, appprops, contenttypes, websettings, wordrelationships, 'data/{}_{}.docx'.format(fname,x))
 
 	def generate_pdf_files(self, fname, num_of_files,seed_text):
+		"""Usage: gnerate_pdf_files"""
 		now = datetime.datetime.now()
 		f = BytesIO()
 		pdf = PDFDocument(f)
