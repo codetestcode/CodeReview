@@ -6,11 +6,11 @@ import xlsxwriter
 import random
 import datetime
 
-relationships 		= relationshiplist()
-appprops 			= appproperties()
-contenttypes 		= contenttypes()
-websettings 		= websettings()
-wordrelationships 	= wordrelationships(relationships)
+relationships = relationshiplist()
+appprops = appproperties()
+contenttypes = contenttypes()
+websettings = websettings()
+wordrelationships = wordrelationships(relationships)
 
 
 class Leviathan:
