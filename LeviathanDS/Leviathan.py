@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#created by:Don Johnson
+#email :dj@codetestcode.io
 from __future__ import print_function
 from io import BytesIO
 from pdfdocument.document import PDFDocument
