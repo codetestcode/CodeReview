@@ -6,10 +6,10 @@ import xlsxwriter
 import random
 import datetime
 
-relationships 		= relationshiplist()
-appprops 					= appproperties()
-contenttypes 			= contenttypes()
-websettings 			= websettings()
+relationships = relationshiplist()
+appprops = appproperties()
+contenttypes = contenttypes()
+websettings = websettings()
 wordrelationships = wordrelationships(relationships)
 
 
